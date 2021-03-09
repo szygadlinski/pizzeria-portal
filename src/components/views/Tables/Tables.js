@@ -7,8 +7,11 @@ const Tables = ({id}) => (
   <div className={styles.component}>
     <h2>Tables</h2>
     <Link to={`${process.env.PUBLIC_URL}/tables/booking/new`}>New Booking</Link>
+    {/* tutaj pętla dla wszystkich rezerwacji */}
     <Link to={`${process.env.PUBLIC_URL}/tables/booking/${id}`}>{`Booking ${id}`}</Link>
+
     <Link to={`${process.env.PUBLIC_URL}/tables/event/new`}>New Event</Link>
+    {/* tutaj pętla dla wszystkich eventów */}
     <Link to={`${process.env.PUBLIC_URL}/tables/event/${id}`}>{`Event ${id}`}</Link>
   </div>
 );
