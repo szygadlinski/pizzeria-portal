@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 import styles from './Waiter.module.scss';
 
+
 const Waiter = ({id}) => (
   <div className={styles.component}>
     <h2>Waiter</h2>
