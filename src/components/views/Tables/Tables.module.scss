@@ -3,3 +3,21 @@
 .component {
   padding: $base-size;
 }
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.dateInput {
+  margin: $base-size auto;
+}
+
+.cell {
+  padding: 0;
+}
+
+.button {
+  width: 100%;
+  padding: $base-size;
+}

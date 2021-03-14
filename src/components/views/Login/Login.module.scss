@@ -3,3 +3,13 @@
 .component {
   padding: $base-size;
 }
+
+.form {
+  display: flex;
+  justify-content: center;
+}
+
+.input {
+  margin: $base-size * 2;
+  min-width: 25%;
+}
