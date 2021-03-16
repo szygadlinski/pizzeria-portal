@@ -72,6 +72,11 @@ for(let i = 12; i < 24; i += 0.5){
   i = parseInt(array[0], 10) + parseInt(array[1], 10) / 60;
 }
 
+let tables = [];
+for(let i = 1; i <= 6; i++){
+  tables.push(i);
+}
+
 const setClassName = (hour, interval, duration) => {
   const arrayHour = hour.split(':');
   hour = parseInt(arrayHour[0], 10) + parseInt(arrayHour[1], 10) / 60;
@@ -105,118 +110,36 @@ const Tables = () => (
       <TableHead>
         <TableRow>
           <TableCell>Hours</TableCell>
-          <TableCell align='right'>Table 1</TableCell>
-          <TableCell align='right'>Table 2</TableCell>
-          <TableCell align='right'>Table 3</TableCell>
-          <TableCell align='right'>Table 4</TableCell>
-          <TableCell align='right'>Table 5</TableCell>
-          <TableCell align='right'>Table 6</TableCell>
+          {tables.map(table => (
+            <TableCell key={tables.indexOf(table)} align='right'>{`Table ${table}`}</TableCell>
+          ))}
         </TableRow>
       </TableHead>
       <TableBody>
-        {demoContent.map(row => (
-          intervals.map(interval => (
-            <TableRow key={intervals.indexOf(interval)}>
-              <TableCell component='th' scope='row'>{interval}</TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '1' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
+        <TableRow >
+          {intervals.map(interval => (
+            <TableCell key={intervals.indexOf(interval)} component='th' scope='row'>{interval}</TableCell>
+            tables.map(table => (
+              <TableCell key={tables.indexOf(table)}>
+                {demoContent.map(cell => (
+                  cell.tableId === table && setClassName(cell.hour, interval, cell.duration)
+                    ?
+                    <Button
+                      component={Link}
+                      to={`${baseUrl}/tables/${cell.type}/${cell.id}`}
+                      className={styles.button}
+                      variant="contained"
+                      color="primary"
+                    >
+                      Reservation details
+                    </Button>
+                    :
+                    ''
+                ))}
               </TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '2' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
-              </TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '3' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
-              </TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '4' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
-              </TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '5' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
-              </TableCell>
-              <TableCell align='right' className={styles.cell}>
-                {row.tableId === '6' && setClassName(row.hour, interval, row.duration)
-                  ?
-                  <Button
-                    component={Link}
-                    to={`${baseUrl}/tables/${row.type}/${row.id}`}
-                    className={styles.button}
-                    variant="contained"
-                    color="primary"
-                  >
-                    Reservation details
-                  </Button>
-                  :
-                  ''
-                }
-              </TableCell>
-            </TableRow>
-          ))
-        ))}
+            ))
+          ))}
+        </TableRow>
       </TableBody>
     </Table>
   </Paper>
