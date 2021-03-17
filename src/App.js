@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 import { StylesProvider } from '@material-ui/core/styles';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider }  from '@material-ui/styles';
@@ -11,7 +12,8 @@ import Kitchen    from './components/views/Kitchen/Kitchen';
 import Login      from './components/views/Login/Login';
 import Order      from './components/views/Order/Order';
 import Tables     from './components/views/Tables/Tables';
-import Waiter     from './components/views/Waiter/Waiter';
+import Waiter     from './components/views/Waiter/WaiterContainer';
+import store      from './redux/store';
 
 const theme = createMuiTheme({
   palette: {
@@ -36,24 +38,26 @@ export const routes = {
 
 function App() {
   return (
-    <BrowserRouter>
-      <StylesProvider injectFirst>
-        <ThemeProvider theme={theme}>
-          <MainLayout>
-            <Switch>
-              <Route exact path={routes.dashboard} component={Dashboard} />
-              <Route exact path={routes.login} component={Login} />
-              <Route exact path={routes.tables} component={Tables} />
-              <Route exact path={routes.booking} component={Booking} />
-              <Route exact path={routes.event} component={Event} />
-              <Route exact path={routes.waiter} component={Waiter} />
-              <Route exact path={routes.order} component={Order} />
-              <Route exact path={routes.kitchen} component={Kitchen} />
-            </Switch>
-          </MainLayout>
-        </ThemeProvider>
-      </StylesProvider>
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <StylesProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <MainLayout>
+              <Switch>
+                <Route exact path={routes.dashboard} component={Dashboard} />
+                <Route exact path={routes.login} component={Login} />
+                <Route exact path={routes.tables} component={Tables} />
+                <Route exact path={routes.booking} component={Booking} />
+                <Route exact path={routes.event} component={Event} />
+                <Route exact path={routes.waiter} component={Waiter} />
+                <Route exact path={routes.order} component={Order} />
+                <Route exact path={routes.kitchen} component={Kitchen} />
+              </Switch>
+            </MainLayout>
+          </ThemeProvider>
+        </StylesProvider>
+      </BrowserRouter>
+    </Provider>
   );
 }
 

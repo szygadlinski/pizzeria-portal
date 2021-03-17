@@ -86,9 +86,10 @@ const demoContent = [
 
 const Order = props => {
   const [table, setTable] = React.useState('');
-  const handleTableChange = event => (
-    setTable(event.target.value)
-  );
+  const handleTableChange = event => {
+    setTable(event.target.value);
+    console.log(event.target.value);
+  };
 
   const [productState, setProductState] = React.useState({
     cake: false,
@@ -124,9 +125,7 @@ const Order = props => {
   };
   const { olives, redpeppers, greenpeppers, mushrooms, basil, salami } = toppingsState;
 
-  const [crust, setCrust] = React.useState({
-    1: true,
-  });
+  const [crust, setCrust] = React.useState('');
   const handleCrustChange = event => (
     setCrust(event.target.value)
   );
@@ -332,19 +331,19 @@ const Order = props => {
                       :
                       ''
                     }
-                    <br />
+                    {row.breakfastParams.length && row.pizzaParams.length ? <br /> : ''}
                     {row.pizzaParams.length
                       ?
-                      '\nPizza params: ' + row.pizzaParams.map(param => (
+                      'Pizza params: ' + row.pizzaParams.map(param => (
                         row.pizzaParams.indexOf(param) === 0 ? param : ' ' + param
                       ))
                       :
                       ''
                     }
-                    <br />
+                    {row.pizzaParams.length && row.saladParams.length ? <br /> : ''}
                     {row.saladParams.length
                       ?
-                      '\nSalad params: ' + row.saladParams.map(param => (
+                      'Salad params: ' + row.saladParams.map(param => (
                         row.saladParams.indexOf(param) === 0 ? param : ' ' + param
                       ))
                       :

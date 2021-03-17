@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Paper      from '@material-ui/core/Paper';
 import TextField  from '@material-ui/core/TextField';
 import Table      from '@material-ui/core/Table';
@@ -7,11 +7,11 @@ import TableBody  from '@material-ui/core/TableBody';
 import TableCell  from '@material-ui/core/TableCell';
 import TableHead  from '@material-ui/core/TableHead';
 import TableRow   from '@material-ui/core/TableRow';
-import Button     from '@material-ui/core/Button';
-import { baseUrl } from '../../../App';
+//import Button     from '@material-ui/core/Button';
+//import { baseUrl } from '../../../App';
 import styles from './Tables.module.scss';
 
-const demoContent = [
+/*const demoContent = [
   {
     id: '1',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
@@ -60,7 +60,7 @@ const demoContent = [
     duration: 3,
     type: 'booking',
   },
-];
+];*/
 
 const startDate = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}T${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`;
 
@@ -77,7 +77,7 @@ for(let i = 1; i <= 6; i++){
   tables.push(i);
 }
 
-const setClassName = (hour, interval, duration) => {
+/*const setClassName = (hour, interval, duration) => {
   const arrayHour = hour.split(':');
   hour = parseInt(arrayHour[0], 10) + parseInt(arrayHour[1], 10) / 60;
 
@@ -89,7 +89,7 @@ const setClassName = (hour, interval, duration) => {
   } else {
     return false;
   }
-};
+};*/
 
 const Tables = () => (
   <Paper className={styles.component} elevation={3}>
@@ -119,7 +119,7 @@ const Tables = () => (
         <TableRow >
           {intervals.map(interval => (
             <TableCell key={intervals.indexOf(interval)} component='th' scope='row'>{interval}</TableCell>
-            tables.map(table => (
+            /*tables.map(table => (
               <TableCell key={tables.indexOf(table)}>
                 {demoContent.map(cell => (
                   cell.tableId === table && setClassName(cell.hour, interval, cell.duration)
@@ -137,7 +137,7 @@ const Tables = () => (
                     ''
                 ))}
               </TableCell>
-            ))
+            ))*/
           ))}
         </TableRow>
       </TableBody>
