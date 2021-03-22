@@ -1,5 +1,5 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Paper      from '@material-ui/core/Paper';
 import TextField  from '@material-ui/core/TextField';
 import Table      from '@material-ui/core/Table';
@@ -7,16 +7,16 @@ import TableBody  from '@material-ui/core/TableBody';
 import TableCell  from '@material-ui/core/TableCell';
 import TableHead  from '@material-ui/core/TableHead';
 import TableRow   from '@material-ui/core/TableRow';
-//import Button     from '@material-ui/core/Button';
-//import { baseUrl } from '../../../App';
+import Button     from '@material-ui/core/Button';
+import { baseUrl } from '../../../App';
 import styles from './Tables.module.scss';
 
-/*const demoContent = [
+const demoContent = [
   {
     id: '1',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '12:30',
-    tableId: '1',
+    tableId: 1,
     duration: 4,
     type: 'event',
   },
@@ -24,7 +24,7 @@ import styles from './Tables.module.scss';
     id: '2',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '16:00',
-    tableId: '3',
+    tableId: 3,
     duration: 2,
     type: 'event',
   },
@@ -32,7 +32,7 @@ import styles from './Tables.module.scss';
     id: '3',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '12:00',
-    tableId: '5',
+    tableId: 5,
     duration: 2,
     type: 'event',
   },
@@ -40,7 +40,7 @@ import styles from './Tables.module.scss';
     id: '4',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '13:00',
-    tableId: '2',
+    tableId: 2,
     duration: 4,
     type: 'booking',
   },
@@ -48,7 +48,7 @@ import styles from './Tables.module.scss';
     id: '5',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '18:00',
-    tableId: '4',
+    tableId: 4,
     duration: 2,
     type: 'booking',
   },
@@ -56,11 +56,11 @@ import styles from './Tables.module.scss';
     id: '6',
     date: `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
     hour: '16:00',
-    tableId: '6',
+    tableId: 6,
     duration: 3,
     type: 'booking',
   },
-];*/
+];
 
 const startDate = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}T${String(new Date().getHours()).padStart(2, '0')}:${String(new Date().getMinutes()).padStart(2, '0')}`;
 
@@ -77,7 +77,7 @@ for(let i = 1; i <= 6; i++){
   tables.push(i);
 }
 
-/*const setClassName = (hour, interval, duration) => {
+const setClassName = (hour, interval, duration) => {
   const arrayHour = hour.split(':');
   hour = parseInt(arrayHour[0], 10) + parseInt(arrayHour[1], 10) / 60;
 
@@ -89,7 +89,7 @@ for(let i = 1; i <= 6; i++){
   } else {
     return false;
   }
-};*/
+};
 
 const Tables = () => (
   <Paper className={styles.component} elevation={3}>
@@ -116,11 +116,11 @@ const Tables = () => (
         </TableRow>
       </TableHead>
       <TableBody>
-        <TableRow >
-          {intervals.map(interval => (
-            <TableCell key={intervals.indexOf(interval)} component='th' scope='row'>{interval}</TableCell>
-            /*tables.map(table => (
-              <TableCell key={tables.indexOf(table)}>
+        {intervals.map((interval, index) => (
+          <TableRow key={index}>
+            <TableCell component='th' scope='row'>{interval}</TableCell>
+            {tables.map((table, index) => (
+              <TableCell key={index} className={styles.cell}>
                 {demoContent.map(cell => (
                   cell.tableId === table && setClassName(cell.hour, interval, cell.duration)
                     ?
@@ -137,9 +137,9 @@ const Tables = () => (
                     ''
                 ))}
               </TableCell>
-            ))*/
-          ))}
-        </TableRow>
+            ))}
+          </TableRow>
+        ))}
       </TableBody>
     </Table>
   </Paper>
