@@ -291,7 +291,7 @@ const Order = props => {
           <FormControl className={styles.formControl}>
             <Button
               component={Link}
-              to={routes.dashboard}
+              to={routes.waiter}
               className={styles.button}
               variant="contained"
               color="primary"

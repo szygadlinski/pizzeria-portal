@@ -11,10 +11,10 @@ import Button     from '@material-ui/core/Button';
 import { baseUrl } from '../../../App';
 import styles from './Waiter.module.scss';
 
-
 class Waiter extends React.Component {
   static propTypes = {
     fetchTables: PropTypes.func,
+    changeStatus: PropTypes.func,
     loading: PropTypes.shape({
       active: PropTypes.bool,
       error: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
@@ -27,34 +27,47 @@ class Waiter extends React.Component {
     fetchTables();
   }
 
-  renderActions(status){
-    switch (status) {
+  renderActions(table){
+    const { changeStatus } = this.props;
+    switch (table.status) {
       case 'free':
         return (
           <>
-            <Button>thinking</Button>
-            <Button>new order</Button>
+            <Button onClick={() => changeStatus(table.id, 'thinking')}>thinking</Button>
+            <Button
+              onClick={() => changeStatus(table.id, 'ordered')}
+              component={Link}
+              to={`${baseUrl}/waiter/order/new`}
+            >
+              new order
+            </Button>
           </>
         );
       case 'thinking':
         return (
-          <Button>new order</Button>
+          <Button
+            onClick={() => changeStatus(table.id, 'ordered')}
+            component={Link}
+            to={`${baseUrl}/waiter/order/new`}
+          >
+              new order
+          </Button>
         );
       case 'ordered':
         return (
-          <Button>prepared</Button>
+          <Button onClick={() => changeStatus(table.id, 'prepared')}>prepared</Button>
         );
       case 'prepared':
         return (
-          <Button>delivered</Button>
+          <Button onClick={() => changeStatus(table.id, 'delivered')}>delivered</Button>
         );
       case 'delivered':
         return (
-          <Button>paid</Button>
+          <Button onClick={() => changeStatus(table.id, 'paid')}>paid</Button>
         );
       case 'paid':
         return (
-          <Button>free</Button>
+          <Button onClick={() => changeStatus(table.id, 'free')}>free</Button>
         );
       default:
         return null;
@@ -90,23 +103,21 @@ class Waiter extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {tables.map(row => (
-                <TableRow key={row.id}>
+              {tables.map(table => (
+                <TableRow key={table.id}>
                   <TableCell component='th' scope='row'>
-                    {row.id}
+                    {table.id}
                   </TableCell>
                   <TableCell align='right'>
-                    {row.status}
+                    {table.status}
                   </TableCell>
                   <TableCell align='right'>
-                    {row.order && (
-                      <Button component={Link} to={`${baseUrl}/waiter/order/${row.order}`}>
-                        {row.order}
-                      </Button>
-                    )}
+                    <Button component={Link} to={`${baseUrl}/waiter/order/${table.order}`}>
+                      {table.order}
+                    </Button>
                   </TableCell>
                   <TableCell align='right'>
-                    {this.renderActions(row.status)}
+                    {this.renderActions(table)}
                   </TableCell>
                 </TableRow>
               ))}
